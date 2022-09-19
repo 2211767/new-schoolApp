@@ -1,0 +1,88 @@
+<!-- <!-- <table class="container">
+
+    <thead>
+        <tr>
+          
+    <td  align="right">
+        <div  class="col-sm-3">
+        <input type="text"   
+       [(ngModel)]="searchString" placeholder="Search " class="form-control">
+      <label><b>Search</b></label>
+    </div>
+    </td>
+    </tr>
+                                
+    </thead>
+
+</table> -->
+<br>
+<div class="container">
+    <div class="sendbtn" style="height:40px">
+        <button type="button" (click)="sendCircular()" class="btn btn-info">Send</button>
+    </div>
+    <div align="center" class="circularbtn" style="height:40px">
+        <input type="text" [(ngModel)]="circularData" placeholder="Circular "
+      class="form-control" >
+    </div>
+</div>
+
+<ng-template #secondDialog style="height:90px">
+    <br>
+    <div *ngIf="circularMessageType" style="color :rgb(0, 28, 128); " align="middle">{{circularMessage}}</div>
+   
+    <br>
+    <div align="center">
+    <button type="button"  style="width:150px" (click)="close()" class="btn btn-info">OK</button>
+</div>
+    <br>
+</ng-template>
+<div class="container">
+    <table class="table table-success table-striped">
+        <thead>
+            <tr>
+                <th>Parent Name</th>
+                <th>Student Name</th>
+                <th>Address</th>
+                <th>State</th>
+                <th>Country</th>
+                <th>City</th>
+                <th>Zip Code</th>
+                <th>Email Adderes</th>
+                <th>Primary Contact Person</th>
+                <th>Primary Contact Person Mobile No</th>
+                <th>Secondary Contact Person</th>
+                <th>Secondary Contact Person Mobile No</th>
+                <th>Action</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+
+
+            <tr *ngFor="let studentData of  studentList">
+                <td>
+                    {{ studentData.student.parentName }}
+                </td>
+                <td>{{ studentData.student.studentName }}</td>
+                <td>{{ studentData.student.address }}</td>
+                <td>{{ studentData.student.state }}</td>
+                <td>{{ studentData.student.country }}</td>
+                <td>{{ studentData.student.city }}</td>
+                <td>{{ studentData.student.zipCode }}</td>
+                <td>{{ studentData.userName }}</td>
+                <td>{{ studentData.student.primaryContactPerson }}</td>
+                <td>{{ studentData.student.primaryContactPersonMobileNo }}</td>
+                <td>{{ studentData.student.seconderyContactPerson }}</td>
+                <td>{{ studentData.student.secondoryContactPersonMobileNo }}</td>
+                <td *ngIf="studentData.status=== 'Approved'" colspan="2"> <button style="width:150px"
+                        class="btn btn-info">Approved</button></td>
+                <td *ngIf="studentData.status != 'Approved' && studentData.status !='Rejected'"> <button type="button"
+                        (click)="approve(studentData.userAppId)" class="btn btn-info">Approve</button></td>
+                <td *ngIf="studentData.status=== 'Rejected'" colspan="2"> <button style="width:150px"
+                        class="btn btn-danger">Rejected</button></td>
+                <td *ngIf="studentData.status !='Rejected' && studentData.status != 'Approved'"> <button
+                        (click)="rejected(studentData.userAppId)" class="btn btn-danger">Reject</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

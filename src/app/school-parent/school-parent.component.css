@@ -1,0 +1,22 @@
+
+ 
+  
+  .cancelbtn {
+    float: right;
+    width: 40%;
+    right: 20px;
+    color: green;
+  }
+  .savebtn {
+    float: right;
+    width: 35%;
+    left: 30px;
+    color: green;
+  }
+
+
+  .error {
+    border: red 1px solid;
+  }
+    
+  

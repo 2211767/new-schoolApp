@@ -1,0 +1,120 @@
+<table border="1" class="tablebtn" align="center">
+
+    <thead>
+        <h2 align="center">Register </h2>
+    </thead>
+
+    <tbody align="center">
+        <div class="register">
+            <form [formGroup]="registerForm" class="login-container">
+                <tr>
+                    <div class="col-sm-14">
+                        <br>
+                        <label><b>First Name*</b></label>
+                        <div>
+                            <input type="text" placeholder="Enter firstName" class="form-control"
+                                formControlName="firstName" [(ngModel)]="registerUser.firstName"
+                                [ngClass]="{ error: submitted && myForm['firstName'].errors}">
+                            <div class="invalid-feedback" class="text-danger"
+                                *ngIf="submitted && myForm['firstName'].errors?.['required']">Enter First Name
+
+                            </div>
+                        </div>
+                    </div>
+                </tr>
+
+                <tr>
+                    <div class="col-sm-14">
+                        <br>
+                        <label><b>Last Name*</b></label>
+                        <div>
+                            <input type="text" placeholder="Enter lastName" class="form-control"
+                                formControlName="lastName" [(ngModel)]="registerUser.lastName"
+                                [ngClass]="{ error: submitted && myForm['lastName'].errors}">
+                            <div class="invalid-feedback" class="text-danger"
+                                *ngIf="submitted && myForm['lastName'].errors?.['required']">Enter last Name
+
+                            </div>
+                        </div>
+                    </div>
+                </tr>
+                <tr>
+                    <div class="col-sm-14">
+                        <br>
+                        <label><b>User Type*</b></label>
+                        <div>
+                            <select placeholder="Enter userRole" class="form-control" formControlName="userRole"
+                                [(ngModel)]="registerUser.userRole"
+                                [ngClass]="{ error: submitted && myForm['lastName'].errors}">
+                                <option value="Admin">Admin</option>
+                                <option value="User">User</option>
+                            </select>
+                            <div class="invalid-feedback" class="text-danger"
+                                *ngIf="submitted && myForm['userRole'].errors?.['required']">Select User Type
+
+                            </div>
+                        </div>
+                    </div>
+                <tr>
+                    <div class="col-sm-14">
+                        <br>
+                        <label><b>Email *</b></label>
+                        <div>
+                            <input type="text" placeholder="Enter Username" class="form-control"
+                                formControlName="userName" [(ngModel)]="registerUser.userName"
+                                [ngClass]="{ error: submitted && myForm['userName'].errors}"
+                                (keyup)="emailValidation($event)">
+
+                            <div class="invalid-feedback" class="text-danger"
+                                *ngIf="submitted && myForm['userName'].errors?.['required']">Enter Email
+
+                            </div>
+
+                            <div class="invalid-feedback" class="text-danger" *ngIf="emailValida">Invalid Email
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </tr>
+                <br>
+                <tr>
+
+                    <div class="col-sm-12">
+                        <label><b>Password *</b></label>
+
+                        <div>
+                            <input type="password" placeholder="Enter Password" class="form-control"
+                                formControlName="password" [(ngModel)]="registerUser.password"
+                                (keyup)="passwordValidation($event)"
+                                [ngClass]="{ error: submitted && myForm['password'].errors}">
+                            <div class="invalid-feedback" class="text-danger"
+                                *ngIf="submitted && myForm['password'].errors?.['required']">Enter Password
+
+                            </div>
+                            <div class="invalid-feedback" class="text-danger" *ngIf="passwordValida">Please, Enter
+                                6 digit Password
+                            </div>
+                        </div>
+                    </div>
+                </tr>
+                <tr>
+                    <br>
+                    <div *ngIf="sucessMessType" style="color :green; " align="middle">{{sucessMessage}}</div>
+                    <br>
+                </tr>
+                <tr align="center">
+
+                    <button type="submit"  class="btn btn-primary"  style="height:40px"
+                        (click)="onSubmit()">Register</button>
+                    <!-- <div class="container">
+                        <button type="button" class="btn btn-info" style="height:40px" (click)="loginUser()"
+                            class="cancelbtn">Login</button>
+                    </div> -->
+                </tr>
+            </form>
+        </div>
+    </tbody>
+    <br>
+</table>

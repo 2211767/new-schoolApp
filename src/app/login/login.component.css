@@ -1,0 +1,30 @@
+.error {
+    border: red 1px solid;
+  }
+  
+  
+  /* Add a color to the cancel button */
+  .cancelbtn {
+    width: 120%;
+    color: red;
+  }
+  
+  .messageSuc {
+    color: green;
+  }
+  .loginbtn{
+    width: 120%;
+    color: green;
+  }
+  
+  .savebtn {
+    width: 120%;
+    color: green;
+  }
+  
+  .tablebtn {
+    width: 35%;
+    position: absolute;
+    left: 430px;
+  
+  }

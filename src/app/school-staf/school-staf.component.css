@@ -1,0 +1,14 @@
+
+ .sendbtn {
+    float: right;
+    width: 4%;
+    right: 9px;
+    color: green;
+  }
+.circularbtn {
+    float: right;
+    left: 8px;
+    width: 70%; 
+    color: green;
+  }
+ 

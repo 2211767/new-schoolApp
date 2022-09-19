@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html >
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<table border="1" class="tablebtn" align="center">
+
+    <thead>
+        <h2 align="center">Login User</h2>
+    </thead>
+    <br>
+    <tbody align="center">
+        <div class="login">
+            <form [formGroup]="loginForm" class="login-container">
+                <tr>
+
+                    <div class="col-sm-14">
+                        <label><b>Email*</b></label>
+
+                        <div>
+                            <input type="text" placeholder="Enter Username" class="form-control"
+                                formControlName="userName" [(ngModel)]="userlogin.userName"
+                                [ngClass]="{ error: submitted && myForm['userName'].errors}"
+                                (keyup)="emailValidation($event)"
+                                >
+                            <div class="invalid-feedback" class="text-danger"
+                                *ngIf="submitted && myForm['userName'].errors?.['required']">Enter Email
+
+                            </div>
+                            <div class="invalid-feedback" class="text-danger"
+                            *ngIf="emailValida">Invalid Email 
+                        </div> 
+                        </div>
+                    </div>
+
+                </tr>
+                <br>
+                <tr>
+                    <div class="col-sm-14">
+                        <label><b>Password*</b></label>
+
+                        <div>
+                            <input type="password" placeholder="Enter Password" class="form-control"
+                                formControlName="password" [(ngModel)]="userlogin.password"
+                                [ngClass]="{ error: submitted && myForm['password'].errors}"
+                                (keyup)="passwordValidation($event)">
+                            <div class="invalid-feedback" class="text-danger"
+                                *ngIf="submitted && myForm['password'].errors?.['required']">Enter Password
+
+                            </div>
+                            <div *ngIf="myForm['password'].errors?.['minlength']">Password must be at least 6 characters</div>
+                        
+                        </div>
+                        <div class="invalid-feedback" class="text-danger"
+                        *ngIf="passwordValida">Please, Enter
+                        6 digit Password
+                    </div>
+                    </div>
+                </tr>
+                <br>
+                <tr>
+                    <div *ngIf="hasErrorOccurred" class="text-danger" align="middle">{{errorMessage}}</div>
+                    <br>
+                </tr>
+                <tr>
+
+                    <button type="submit" class="btn btn-info" style="height:40px" (click)="onSubmit()">Login</button>
+                </tr>
+                <br>
+                <br>
+
+                <tr>
+                    <button type="submit" class="btn btn-info" style="height:40px" (click)="onRegister()">Register</button>
+                </tr>
+                <br>
+                <br>
+               
+                <br>
+                <br>
+            </form>
+        </div>
+    </tbody>
+</table>
+</html>

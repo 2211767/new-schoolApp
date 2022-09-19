@@ -1,0 +1,93 @@
+<br>
+<br>
+
+<!-- <h1 align="center" >Student Details</h1> -->
+<div class="container">
+    <table borde="1" class="table table-striped">
+        <tbody>
+            <tr>
+                <td>Parent Name:</td>
+                <td>{{parentData.student.parentName}}</td>
+            </tr>
+            <tr>
+                <td>Student Name:</td>
+                <td>{{parentData.student.studentName}}</td>
+            </tr>
+            <tr>
+                <td>Student Name:</td>
+                <td>{{parentData.student.studentName}}</td>
+            </tr>
+            <tr>
+                <td>Country:</td>
+                <td>{{parentData.student.country}}</td>
+            </tr>
+            <tr>
+                <td>State:</td>
+                <td>{{parentData.student.state}}</td>
+            </tr>
+            <tr>
+                <td>City:</td>
+                <td>{{parentData.student.city}}</td>
+            </tr>
+            <tr>
+                <td>Address:</td>
+                <td>{{parentData.student.address}}</td>
+            </tr>
+            <tr>
+                <td>ZipCode:</td>
+                <td>{{parentData.student.zipCode}}</td>
+            </tr>
+            <tr>
+                <td>Email Address:</td>
+                <td>{{parentData.userName}}</td>
+            </tr>
+            <tr>
+                <td>Primary Contact Person:</td>
+                <td>{{parentData.student.primaryContactPerson}}</td>
+            </tr>
+            <tr>
+                <td>Primary Contact Person Mobile No:</td>
+                <td>{{parentData.student.primaryContactPersonMobileNo}}</td>
+            </tr>
+            <tr>
+                <td>Secondary Contact Person:</td>
+                <td>{{parentData.student.seconderyContactPerson}}</td>
+            </tr>
+            <tr>
+                <td>Secondary Contact Person Mobile No:</td>
+                <td>{{parentData.student.secondoryContactPersonMobileNo}}</td>
+            </tr>
+        </tbody>
+
+
+    </table>
+</div>
+<br>
+<br>
+<h1 align="center">Circular</h1>
+<div class="container">
+    <table class="table table-striped">
+
+        <tbody>
+
+            <tr align="center" color="red">
+                <th>Circular Id</th>
+                <th>Circular</th>
+                <th>Register Id </th>
+                <th>Time Stamp</th>
+                <th>Acknowldge</th>
+            </tr>
+            <br>
+            <tr align="center" *ngFor="let circular of parentData.student.circular">
+                <td>{{circular.circularId}}</td>
+                <td>{{circular.circular}}</td>
+                <td>{{circular.studentId}}</td>
+                <td>{{circular.circularCreatedDate}}</td>
+                <td *ngIf="circular.acknowledge"> <label><input type="checkbox" [disabled]="circular.acknowledge"
+                            checked="circular.acknowledge">Acknowldge</label></td>
+                <td *ngIf="!circular.acknowledge"> <label><input type="checkbox"
+                            (change)="acknowldege($event,circular.circularId)">Acknowldge</label></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

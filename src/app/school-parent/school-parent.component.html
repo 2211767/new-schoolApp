@@ -1,0 +1,269 @@
+<br>
+
+<table class="container">
+
+    <thead>
+        <tr>
+            <td>
+                <button type="button" [disabled]="disableAddButton" (click)="addNewStudentDetails()"
+                    class="btn btn-info">Add StudentDetails</button>
+            </td>
+            <!-- <td  align="right">
+        <div  class="col-sm-3">
+        <input type="text"   
+       [(ngModel)]="searchString" placeholder="Search " class="form-control">
+      <label><b>Search</b></label>
+    </div>
+    </td> -->
+        </tr>
+
+    </thead>
+
+</table>
+<br>
+
+
+<div class="container">
+    <table class="table table-success table-striped">
+        <thead>
+            <tr>
+                <th>Register Id</th>
+                <th>Parent Name</th>
+                <th>Student Name</th>
+                <th>Address</th>
+                <th>Country</th>
+                <th>State</th>
+                <th>City</th>
+                <th>Zip Code</th>
+                <th>Email Address</th>
+                <th>Primary Contact Person</th>
+                <th>Primary Contact Person Mobile No</th>
+                <th>Secondary Contact Person</th>
+                <th>Secondary Contact Person Mobile No</th>
+                <th>Action</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr *ngIf="studentData">
+                <td>
+                <p type="button" (click)="navigatingCircular()" style="text-decoration:underline;">
+                    {{ studentData.registerId }} </p>
+                </td>
+                <td> {{ studentData.parentName }}</td>
+                <td>{{ studentData.studentName }}</td>
+                <td>{{ studentData.address }}</td>
+                <td>{{ studentData.country }}</td>
+                <td>{{ studentData.state }}</td>
+                <td>{{ studentData.city }}</td>
+                <td>{{ studentData.zipCode }}</td>
+                <td>{{ userName }}</td>
+                <td>{{ studentData.primaryContactPerson }}</td>
+                <td>{{ studentData.primaryContactPersonMobileNo }}</td>
+                <td>{{ studentData.seconderyContactPerson }}</td>
+                <td>{{ studentData.secondoryContactPersonMobileNo }}</td>
+                <td> <button type="button" [disabled]="disableUpdateButton" (click)="updateStudentDetails()"
+                        class="btn btn-info">Update</button></td>
+                <td> <button type="button" [disabled]="disableSubmitButton" (click)="submit()"
+                        class="btn btn-info">Submit</button></td>
+            </tr>
+        </tbody>
+    </table>
+    <div *ngIf="submitMessageType" style="color :rgb(92, 47, 255); " align="center">{{submitMessage}}</div>
+</div>
+
+<ng-template #secondDialog>
+    <table [formGroup]="registerStudentForm">
+        <thead>
+            <h2 *ngIf="studentAddLabel" align="center">Register Student</h2>
+            <h2 *ngIf="studentUpdateLabel" align="center">Update Student Details</h2>
+
+        </thead>
+        <tbody>
+            <div class="row">
+                &nbsp; &nbsp; &nbsp; &nbsp;
+                <div class="col-sm-5">
+                    <label>Parent Name*</label>
+                    <div>
+                        <input type="text" formControlName="parentName" placeholder="Enter Parent Name"
+                            class="form-control" [ngClass]="{ error: submitted && myForm['parentName'].errors}">
+                        <div class="invalid-feedback" class="text-danger"
+                            *ngIf="submitted && myForm['parentName'].errors?.['required']">Enter Parent Name
+
+                        </div>
+                    </div>
+                </div>
+                &nbsp; &nbsp; &nbsp; &nbsp;
+                <div class="col-sm-5">
+                    <label>Student Name*</label>
+                    <input type="text" formControlName="studentName" placeholder="Enter Student Name"
+                        class="form-control" [ngClass]="{ error: submitted && myForm['studentName'].errors}">
+                    <div class="invalid-feedback" class="text-danger"
+                        *ngIf="submitted && myForm['studentName'].errors?.['required']">Enter Student Name
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                &nbsp; &nbsp; &nbsp; &nbsp;
+                <div class="col-sm-5">
+                    <label>Address*</label>
+                    <div>
+                        <input type="text" formControlName="address" placeholder="Enter Address Name"
+                            class="form-control" [ngClass]="{ error: submitted && myForm['address'].errors}">
+
+                        <div class="invalid-feedback" class="text-danger"
+                            *ngIf="submitted && myForm['address'].errors?.['required']">Enter Adderess
+
+                        </div>
+                    </div>
+                </div>
+                &nbsp; &nbsp; &nbsp; &nbsp;
+                <div class="col-sm-5">
+                    <label>Country*</label>
+                    <div>
+                        <!-- <input type="text" formControlName="country" placeholder="Enter Country Name"
+                            class="form-control" [ngClass]="{ error: submitted && myForm['country'].errors}"> -->
+                            <select formControlName="country" 
+                            (change)="countryChange($event)" class="form-control" [ngClass]="{ error: submitted && myForm['country'].errors}" >
+                                <option>Select</option>
+                                <option *ngFor='let country of countryList' [value]="country">{{country}}</option>
+                              </select> 
+                        <div class="invalid-feedback" class="text-danger"
+                            *ngIf="submitted && myForm['country'].errors?.['required']">Enter Country
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                &nbsp; &nbsp; &nbsp; &nbsp;
+                <div class="col-sm-5">
+                    <label>State*</label>
+                    <!-- <input type="text" formControlName="state" placeholder="Enter State Name"
+                        [ngClass]="{ error: submitted && myForm['state'].errors}" class="form-control"> -->
+                  
+                        <select formControlName="state"  class="form-control" [ngClass]="{ error: submitted && myForm['state'].errors}" >
+                            <!-- <option>Select</option> -->
+                            <option *ngFor='let state of statelist' [value]="state">{{state}}</option>
+                          </select> 
+                        <div class="invalid-feedback" class="text-danger"
+                        *ngIf="submitted && myForm['state'].errors?.['required']">Enter State
+
+                    </div>
+                </div>
+                &nbsp; &nbsp; &nbsp; &nbsp;
+                <div class="col-sm-5">
+                    <label>City*</label>
+                    <input type="text" formControlName="city" placeholder="Enter City Name"
+                        [ngClass]="{ error: submitted && myForm['city'].errors}" class="form-control">
+                    <div class="invalid-feedback" class="text-danger"
+                        *ngIf="submitted && myForm['city'].errors?.['required']">Enter City
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                &nbsp; &nbsp; &nbsp; &nbsp;
+                <div class="col-sm-5">
+                    <label>Zip Code*</label>
+                    <div>
+                        <input type="number" formControlName="zipCode" placeholder="Enter Zip Code "
+                            [ngClass]="{ error: submitted && myForm['zipCode'].errors}" class="form-control"
+                            (keyup)="zipCodeValidation($event)">
+                        <div class="invalid-feedback" class="text-danger"
+                            *ngIf="submitted && myForm['zipCode'].errors?.['required']">Enter Zip Code
+
+                        </div>
+                        <div class="invalid-feedback" class="text-danger" *ngIf="zipCodeNumber">Please, Enter
+                            6 digit Zip Code Number.
+                        </div>
+                    </div>
+                </div>
+                &nbsp; &nbsp; &nbsp; &nbsp;
+                <div class="col-sm-5">
+                    <label>Primary Contact Person*</label>
+                    <div>
+                        <input type="text" formControlName="primaryContactPerson"
+                            [ngClass]="{ error: submitted && myForm['primaryContactPerson'].errors}"
+                            placeholder="Enter Primary Contact Person" class="form-control">
+                        <div class="invalid-feedback" class="text-danger"
+                            *ngIf="submitted && myForm['primaryContactPerson'].errors?.['required']">Enter Primary
+                            Contact Person
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                &nbsp; &nbsp; &nbsp; &nbsp;
+                <div class="col-sm-5">
+                    <label>Secondary Contact Person*</label>
+                    <div>
+                        <input type="text" formControlName="seconderyContactPerson"
+                            [ngClass]="{ error: submitted && myForm['seconderyContactPerson'].errors}"
+                            placeholder="Enter Primary Contact Person" class="form-control">
+                        <div class="invalid-feedback" class="text-danger"
+                            *ngIf="submitted && myForm['seconderyContactPerson'].errors?.['required']">Enter Secondary
+                            Contact Person
+
+                        </div>
+                    </div>
+                </div>
+                &nbsp; &nbsp; &nbsp; &nbsp;
+                <div class="col-sm-5">
+                    <label>Secondary Contact Person Mobile No*</label>
+                    <input type="number" formControlName="secondoryContactPersonMobileNo"
+                        [ngClass]="{ error: submitted && myForm['secondoryContactPersonMobileNo'].errors}"
+                        placeholder="Enter Primary Contact Person Mobile" class="form-control"
+                        (keyup)="secondaryPhoneNo($event)">
+                    <div class="invalid-feedback" class="text-danger"
+                        *ngIf="submitted && myForm['secondoryContactPersonMobileNo'].errors?.['required']">Enter
+                        Secondary Contact No
+
+                    </div>
+                    <div class="invalid-feedback" class="text-danger" *ngIf="secunderyContactNumber">Please, Enter
+                        10 digit Mobile Number.
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                &nbsp; &nbsp; &nbsp; &nbsp;
+                <div class="col-sm-5">
+                    <label>Primary Contact Person Mobile No*</label>
+                    <input type="number" formControlName="primaryContactPersonMobileNo"
+                        [ngClass]="{ error: submitted && myForm['primaryContactPersonMobileNo'].errors}"
+                        placeholder="Enter Primary Contact Person Mobile" class="form-control"
+                        (keyup)="primaryPhoneNo($event)">
+                    <div class="invalid-feedback" class="text-danger"
+                        *ngIf="submitted && myForm['primaryContactPersonMobileNo'].errors?.['required']">Enter Primary
+                        Contact No
+                    </div>
+                    <div class="invalid-feedback" class="text-danger" *ngIf="primaryContactNumber">Please, Enter
+                        10 digit Mobile Number.
+                    </div>
+                </div>
+            </div>
+            <br>
+        </tbody>
+
+
+        <div *ngIf="sucessMessType" style="color :green; " align="middle">{{sucessMessage}}</div>
+
+        <div *ngIf="updatedMessageType" style="color :green; " align="middle">{{updateMessage}}</div>
+
+
+        <div class="container" class="savebtn">
+            <button type="submit" style="height:40px" (click)="cancel()" class="btn btn-danger">Cancel</button>
+        </div>
+        <div class="container" *ngIf="studentAddLabel" class="cancelbtn">
+            <button type="submit" style="height:40px" (click)="saveStudent()" class="btn btn-info">Save</button>
+        </div>
+
+        <div class="container" *ngIf="studentUpdateLabel" class="cancelbtn">
+            <button type="submit" style="height:40px" (click)="saveStudent()" class="btn btn-info">Update</button>
+        </div>
+
+    </table>
+</ng-template>
